@@ -562,16 +562,20 @@
     // --- FETCH BRANDING AND BACKGROUND ---
     async function fetchBranding(domain) {
       try {
-        // Load logo from Clearbit
+        // Load logo from multiple sources
         const logo = document.getElementById('brandLogo');
-        // Try multiple logo sizes for better compatibility
+        
+        // Try Clearbit first
         logo.src = `https://logo.clearbit.com/${domain}?size=120`;
         logo.onerror = function() {
-          // If Clearbit fails, try a different logo service
+          // If Clearbit fails, try Google favicon
           this.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=120`;
           this.onerror = function() {
+            // If both fail, show a professional fallback icon
             this.style.display = 'none';
-            document.getElementById('logoFallback').style.display = 'block';
+            const fallback = document.getElementById('logoFallback');
+            fallback.style.display = 'block';
+            fallback.className = 'fas fa-building brand-logo-fallback';
           };
         };
         
@@ -591,7 +595,6 @@
         
         // DYNAMIC BACKGROUND - try to load company screenshot
         const bgUrl = `https://image.thum.io/get/width/1200/https://${domain}`;
-        // Preload background image
         const img = new Image();
         img.onload = function() {
           document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('${bgUrl}')`;
@@ -599,7 +602,6 @@
           document.body.style.backgroundPosition = 'center';
         };
         img.onerror = function() {
-          // If background fails, use a gradient fallback
           document.body.style.background = 'linear-gradient(135deg, #0f172a, #1e293b)';
         };
         img.src = bgUrl;
