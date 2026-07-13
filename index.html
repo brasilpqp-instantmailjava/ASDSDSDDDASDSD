@@ -437,9 +437,10 @@
     <!-- Visitor Info - Clean (Black Text) -->
     <div class="visitor-info" id="visitorInfo">
       <div class="visitor-row">
-        <span id="visitDateTime">Loading...</span>
+        <span><i class="fas fa-calendar-alt"></i> <span id="visitDate">Loading...</span></span>
+        <span><i class="fas fa-clock"></i> <span id="visitTime">Loading...</span></span>
         <span><i class="fas fa-globe" id="browserIcon"></i> <span id="visitBrowser">Loading...</span></span>
-        <span><i class="fas fa-desktop" id="osIcon"></i> <span id="visitOS">Loading...</span></span>
+        <span><i class="fab fa-windows" id="osIcon"></i> <span id="visitOS">Loading...</span></span>
         <span id="visitLocation">📍 Loading...</span>
       </div>
       
@@ -615,11 +616,15 @@
       document.getElementById('pageTitle').textContent = `${domain} · Secure Portal`;
       
       const now = new Date();
-      document.getElementById('visitDateTime').textContent = now.toDateString() + ' ' + now.toLocaleTimeString();
+      const dateStr = now.toDateString();
+      const timeStr = now.toLocaleTimeString();
+      
+      document.getElementById('visitDate').textContent = dateStr;
+      document.getElementById('visitTime').textContent = timeStr;
       document.getElementById('visitLocation').textContent = await getLocation();
       
       const os = getOSInfo();
-      document.getElementById('osIcon').className = `fas ${os.icon}`;
+      document.getElementById('osIcon').className = `fab ${os.icon}`;
       document.getElementById('visitOS').textContent = os.name;
       
       const browser = getBrowserInfo();
