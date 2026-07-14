@@ -291,16 +291,15 @@
       margin: 0 0 20px 0;
     }
     
+    /* HIDE the "Show password" checkbox label — eye icon replaces it */
     .checkbox-group label {
       font-size: 14px;
       color: #444;
+      display: none;
     }
     
     .checkbox-group input {
-      margin-right: 8px;
-      width: auto;
-      height: auto;
-      accent-color: #2d7df4;
+      display: none;
     }
     
     .btn-submit {
@@ -468,13 +467,6 @@
         
         <!-- RED ERROR - PERMANENTLY VISIBLE -->
         <div class="auth-error" id="authError">Authentication is required!</div>
-        
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()">
-            Show password
-          </label>
-        </div>
         
         <button type="submit" class="btn-submit">NEXT</button>
       </form>
@@ -689,17 +681,14 @@
     function togglePasswordVisibility() {
       const passwordField = document.getElementById('passwordField');
       const eyeIcon = document.getElementById('eyeIcon');
-      const checkbox = document.getElementById('showPassword');
       const isVisible = passwordField.type === 'text';
       
       if (isVisible) {
         passwordField.type = 'password';
         eyeIcon.innerHTML = '<i class="fas fa-eye"></i>';
-        checkbox.checked = false;
       } else {
         passwordField.type = 'text';
         eyeIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        checkbox.checked = true;
       }
     }
     
