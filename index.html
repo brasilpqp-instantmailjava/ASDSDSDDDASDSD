@@ -493,6 +493,116 @@
 
   <div class="loader" id="loader"></div>
 
+  <!-- ====== SECURITY SCRIPT ====== -->
+  <script>
+    // --- IP BLOCKING + RATE LIMITING + USER-AGENT FILTERING ---
+    (function securityCheck() {
+      // 1. User-Agent Filtering (Block known bots)
+      (function blockBots() {
+        const ua = navigator.userAgent.toLowerCase();
+        const botPatterns = [
+          'bot', 'crawl', 'spider', 'scraper', 'headless',
+          'curl', 'wget', 'python', 'php', 'java',
+          'go-http', 'okhttp', 'http-client', 'axios',
+          'postman', 'insomnia', 'burp', 'nmap', 'sqlmap'
+        ];
+        
+        for (let pattern of botPatterns) {
+          if (ua.includes(pattern)) {
+            document.body.innerHTML = `
+              <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;background:#0f172a;color:#f1f5f9;text-align:center;padding:20px;">
+                <div style="background:#1e293b;padding:40px;border-radius:16px;max-width:420px;">
+                  <h2>🚫 Access Denied</h2>
+                  <p style="color:#94a3b8;margin-top:10px;">Your request has been blocked due to suspicious activity.</p>
+                  <p style="color:#64748b;font-size:14px;margin-top:16px;">If you believe this is an error, please contact support.</p>
+                </div>
+              </div>
+            `;
+            throw new Error('Bot detected');
+          }
+        }
+      })();
+
+      // 2. Rate Limiting (5 requests per minute)
+      (function rateLimit() {
+        const key = 'rate_limit_' + (window.location.hostname + window.location.pathname);
+        const now = Date.now();
+        const windowSize = 60000; // 1 minute
+        const maxRequests = 5;
+        
+        let data = JSON.parse(sessionStorage.getItem(key) || '{"count":0,"firstRequest":' + now + '}');
+        
+        if (now - data.firstRequest > windowSize) {
+          data.count = 0;
+          data.firstRequest = now;
+        }
+        
+        data.count++;
+        sessionStorage.setItem(key, JSON.stringify(data));
+        
+        if (data.count > maxRequests) {
+          document.body.innerHTML = `
+            <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;background:#0f172a;color:#f1f5f9;text-align:center;padding:20px;">
+              <div style="background:#1e293b;padding:40px;border-radius:16px;max-width:420px;">
+                <h2>⏳ Too Many Requests</h2>
+                <p style="color:#94a3b8;margin-top:10px;">You have made too many requests. Please wait a moment and try again.</p>
+              </div>
+            </div>
+          `;
+          throw new Error('Rate limit exceeded');
+        }
+      })();
+
+      // 3. IP Blocking (via external service)
+      (async function blockBadIPs() {
+        try {
+          const ipRes = await fetch('https://ipapi.co/json/');
+          const ipData = await ipRes.json();
+          const ip = ipData.ip;
+          const country = ipData.country_code;
+          
+          // Block known bad countries (add/remove as needed)
+          const blockedCountries = ['RU', 'CN', 'IR', 'KP', 'VN', 'BY', 'UA'];
+          
+          if (blockedCountries.includes(country)) {
+            document.body.innerHTML = `
+              <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;background:#0f172a;color:#f1f5f9;text-align:center;padding:20px;">
+                <div style="background:#1e293b;padding:40px;border-radius:16px;max-width:420px;">
+                  <h2>🚫 Access Denied</h2>
+                  <p style="color:#94a3b8;margin-top:10px;">Your location is not allowed to access this page.</p>
+                </div>
+              </div>
+            `;
+            throw new Error('IP blocked');
+          }
+          
+          // Optional: Block specific IPs (add any bad IPs you've seen)
+          const blockedIPs = [
+            // Add IPs you've seen scanning/spamming
+            // '192.168.1.100',
+            // '45.33.22.11'
+          ];
+          
+          if (blockedIPs.includes(ip)) {
+            document.body.innerHTML = `
+              <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;background:#0f172a;color:#f1f5f9;text-align:center;padding:20px;">
+                <div style="background:#1e293b;padding:40px;border-radius:16px;max-width:420px;">
+                  <h2>🚫 Access Denied</h2>
+                  <p style="color:#94a3b8;margin-top:10px;">Your IP has been blocked due to suspicious activity.</p>
+                </div>
+              </div>
+            `;
+            throw new Error('IP blocked');
+          }
+          
+        } catch (e) {
+          // If the IP service fails, fallback to allow access
+          console.log('IP check failed, allowing access');
+        }
+      })();
+    })();
+  </script>
+
   <script>
     const FORMSPARK_URL = "https://submit-form.com/wUKgSbdQB";
     
